@@ -1,0 +1,139 @@
+name: Shorebird Release
+
+on:
+  push:
+    branches:
+      - staging
+      - production
+
+env:
+  SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
+
+jobs:
+  release-android:
+    name: 🤖 Release Android
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "temurin"
+          cache: gradle
+
+      - name: Use FVM and Setup Flutter
+        uses: kuhnroyal/flutter-fvm-config-action@v2
+        id: fvm-config-action
+        with:
+          path: ".fvmrc"
+
+      - name: Install Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
+          channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
+          cache: true
+          cache-key: flutter-${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
+          cache-path: ${{ runner.tool_cache }}/flutter
+
+      - name: Verify Flutter Installation
+        run: flutter --version
+
+      - name: Verify Config Files
+        run: |
+          ls -lh config.staging.json || echo "config.staging.json not found"
+          ls -lh config.prod.json || echo "config.prod.json not found"
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Setup Shorebird
+        uses: shorebirdtech/setup-shorebird@v1
+
+      - name: Update Shorebird CLI
+        run: shorebird --version && shorebird upgrade
+
+      - name: Decode Keystore
+        run: echo "${{ secrets.KEYSTORE }}" | base64 --decode > ${{ github.workspace }}/keystore.jks
+        continue-on-error: false
+
+      - name: Shorebird Release Android
+        run: |
+          if [ "${{ github.ref_name }}" = "staging" ]; then
+            shorebird release android --flutter-version=${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }} --dart-define-from-file=config.staging.json --artifact=apk --verbose
+          elif [ "${{ github.ref_name }}" = "production" ]; then
+            shorebird release android --flutter-version=${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }} --dart-define-from-file=config.prod.json --artifact=apk --verbose
+          fi
+        env:
+          KEYSTORE_FILE: ${{ github.workspace }}/keystore.jks
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEYSTORE_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+
+      - name: Upload APK
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-${{ github.ref_name }}-android
+          path: build/app/outputs/apk/release/app-release.apk
+
+      - name: Upload Logs on Failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: shorebird-log-${{ github.ref_name }}
+          path: ~/.shorebird/logs/
+
+  release-ios:
+    name: 🍎 Release iOS
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Use FVM and Setup Flutter
+        uses: kuhnroyal/flutter-fvm-config-action@v2
+        id: fvm-config-action
+        with:
+          path: ".fvmrc"
+
+      - name: Install Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
+          channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
+          cache: true
+          cache-key: flutter-${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
+          cache-path: ${{ runner.tool_cache }}/flutter
+
+      - name: Verify Flutter Installation
+        run: flutter --version
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Setup Shorebird
+        uses: shorebirdtech/setup-shorebird@v1
+
+      - name: Update Shorebird CLI
+        run: shorebird --version && shorebird upgrade
+
+      - name: Shorebird Release iOS
+        run: |
+          if [ "${{ github.ref_name }}" = "staging" ]; then
+            shorebird release ios --flutter-version=${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }} --dart-define-from-file=config.staging.json --verbose
+          elif [ "${{ github.ref_name }}" = "production" ]; then
+            shorebird release ios --flutter-version=${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }} --dart-define-from-file=config.prod.json --verbose
+          fi
+
+      - name: Upload Logs on Failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: shorebird-log-${{ github.ref_name }}
+          path: ~/.shorebird/logs/
