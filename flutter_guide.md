@@ -1,118 +1,40 @@
+# Flutter Development Guide
+
 ## 1. Requirement Installation
 
-Flutter development စတင်ဖို့ လိုအပ်တဲ့ tools တွေကို အတိုချုပ်ပြီး ပြောပြပေးထားပါတယ်။
-
-1. **Download Flutter SDK and Setup**
-
-   - Flutter SDK ကို [official website](https://flutter.dev/docs/get-started/install) ကနေ download လုပ်ပြီး local machine မှာ setup လုပ်ပါ။
-   - Path environment variable ထဲမှာ `flutter/bin` folder ကို ထည့်ပါ (Windows: System Settings > Environment Variables; macOS/Linux: `.zshrc` ဒါမှမဟုတ် `.bashrc` ထဲမှာ `export PATH="$PATH:/path/to/flutter/bin"` ထည့်ပါ)။
-   - `flutter doctor` run ပြီး dependencies အကုန် အဆင်သင့်ဖြစ်မဖြစ် စစ်ပါ။
-
-2. **Download Android Studio for Emulator (Windows/macOS)**
-
-   - Android Studio ကို [official site](https://developer.android.com/studio) ကနေ download လုပ်ပြီး install လုပ်ပါ။
-   - Android Emulator အတွက် AVD တစ်ခု `Tools > Device Manager` ကနေ create လုပ်ပါ။
-
-3. **Download Xcode for Simulator (macOS)**
-   - macOS မှာ iOS simulator အတွက် Xcode ကို [App Store](https://apps.apple.com/us/app/xcode/id497799835) ကနေ install လုပ်ပါ။
-   - `Xcode > Preferences > Components` ကနေ simulator version တွေ download လုပ်ပါ။
-   - Command line tools ကို `xcode-select --install` နဲ့ install လုပ်ပါ။ **Note**: `open -a Simulator` နဲ့ simulator စစ်ပါ။
-
----
+- Flutter development စတင်ဖို့ လိုအပ်တဲ့ tools တွေကို အတိုချုပ် ဖော်ပြထားပါတယ်။
+- **Details**: [docs/details/01_installation](docs/details/01_installation.md)
 
 ## 2. FVM (Flutter Version Management)
 
-FVM က long-term project တွေမှာ Flutter version ကို ထိန်းချုပ်ဖို့ အထောက်အကူဖြစ်ပြီး team နဲ့ အလုပ်လုပ်တဲ့အခါ မရှိမဖြစ် လိုအပ်ပါတယ်။
-
-#### 1. Installation
-
-- **Windows**:
-  - Chocolatey မရှိရင် [chocolatey.org](https://chocolatey.org/install) ကနေ install လုပ်ပါ။
-  - Install Chocolatey with PowerShell:
-    ```shell
-    Set-ExecutionPolicy Bypass -Scope CurrentUser; iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
-    ```
-  - `choco install fvm`
-- **macOS**:
-  - `curl -fsSL https://fvm.app/install.sh | bash`
-- **Pub (All OS)**:
-  - `dart pub global activate fvm`
-  - **Note**: Global Flutter ကို FVM နဲ့ မထိန်းချင်ရင် ဒီနည်းကို ရှောင်ပါ။
-
-#### 2. Configuration
-
-1. **Install Desired Flutter Version**: `fvm install 3.24.3` (Latest သုံးချင်ရင် `fvm install stable`)
-2. **Create Flutter Project**: `flutter create my_project`
-3. **Set Project Version**: Project root မှာ `fvm use 3.24.3` run ပါ။
-4. **Run Commands with FVM**:
-   - Add Package: `fvm flutter pub add package_name`
-   - Get Dependencies: `fvm flutter pub get`
-   - Run Project: `fvm flutter run`
-
----
+- FVM က long-term project တွေမှာ Flutter version ကို ထိန်းချုပ်ဖို့ အထောက်အကူဖြစ်ပြီး team နဲ့ အလုပ်လုပ်တဲ့အခါ မရှိမဖြစ် လိုအပ်ပါတယ်။
+- **Details**: [docs/details/02_fvm](docs/details/02_fvm.md)
 
 ## 3. Flutter CI
 
-Flutter CI ကို ထည့်သွင်းဖို့ လိုအပ်ပြီး အောက်က အချက်တွေကို စစ်ဆေးပါ။
-
-Eg: `.github/workflows/ci.yaml` [ci.yaml](.github/workflows/ci.yaml)
-
-- **Check FVM Flutter Version**
-- **Check Code Format**
-- **Check Unit Tests**
-- **Additional Checks**:
-  - Linting: `fvm flutter analyze`
-  - Dependency audit: `fvm flutter pub deps`
+- Flutter CI ကို ထည့်သွင်းဖို့ လိုအပ်ပြီး code quality စစ်ဆေးမှုတွေ လုပ်ဖို့ အသုံးဝင်ပါတယ်။
+- **Details**: [.github/workflows/ci](.github/workflows/ci.yaml)
 
 ## 4. VSCode Settings
 
-Team နဲ့ အလုပ်လုပ်မှာမို့ VSCode ကို ချိန်ဖို့ လိုအပ်ပါတယ်။
-
-- **Extensions**:
-  - Flutter, Dart, FVM extensions ထည့်ပါ။
-- **Settings**:
-  - `.vscode/settings.json` [settings.json](.vscode/settings.json)
-- Team တစ်ခုလုံး တူညီတဲ့ settings သုံးဖို့ မမေ့ပါနဲ့။
+- Team နဲ့ အလုပ်လုပ်မှာမို့ VSCode ကို Setting ချိန်ထားဖို့ဖို့ လိုအပ်ပါတယ်။
+- **Details**: [.vscode/settings.json](.vscode/settings.json)
 
 ## 5. Dart Define
 
-Dart Define က compile-time မှာ secure ဖြစ်အောင် environment variables (ဥပမာ: API keys, app name) တွေ ထည့်ဖို့ အသုံးဝင်ပါတယ်။
-
-- **Use Cases**:
-  - develop, staging, production အတွက် ခွဲပြီး app name, API keys, base URLs စတာတွေ သတ်မှတ်ဖို့။
-- **Example Config**:  
-  **File: config.dev.json**
-  ```json
-  {
-    "APP_NAME": "App Name.DEV",
-    "APP_SUFFIX": ".dev",
-    "API_BASE_URL": "http://172.20.10.5:8080", // Local IP ကို Android emulator အတွက် သုံးပါ။ iOS မှာ `localhost` အလုပ်လုပ်တယ်။
-    "GOOGLE_API_KEY": ""
-  }
-  ```
-- **Commands**:
-  - **Run**: `fvm flutter run --dart-define-from-file=config.dev.json`
-  - **Build Android**: `fvm flutter build apk --dart-define-from-file=config.dev.json`
-  - **Build iOS**: `fvm flutter build ios --dart-define-from-file=config.dev.json`
-- **Manual API Key**: Config ထဲမထည့်ချင်ရင် CLI ကနေ ထည့်လို့ရပါတယ်။
-  - `fvm flutter run --dart-define-from-file=config.dev.json --dart-define=GOOGLE_API_KEY=your_api_key`
-- **Native Integration**:
-  - `APP_NAME` နဲ့ `GOOGLE_API_KEY` ကို native မှာ ထည့်ဖို့လိုတယ်။
-
----
+- Dart Define က compile-time မှာ secure ဖြစ်အောင် environment variables တွေ ထည့်ဖို့ အသုံးဝင်ပါတယ်။
+- **Details**: [docs/details/05_dart_define.md](docs/details/05_dart_define.md)
 
 ## 6. Shorebird
 
-[Shorebird](https://docs.shorebird.dev/) က code push လုပ်ဖို့ အသုံးဝင်ပြီး Play Store/App Store update မလိုပဲ app ကို update လုပ်နိုင်ပါတယ်။
-shorebird ကို pipeline create လုပ်ပြီး run လုပ်ဖို့ အကြံပေးချင်ပါတယ်။
-Eg: `.github/workflows/release.yaml` [release.yaml](.github/workflows/release.yaml)
-
+- Shorebird က code push လုပ်ဖို့ အသုံးဝင်ပြီး Play Store/App Store update မလိုပဲ app ကို update လုပ်နိုင်ပါတယ်။(doc)[https://docs.shorebird.dev/]
+- **Details**: [.github/workflows/release.yaml](.github/workflows/release.yaml)
 - **Limitations**:
   - Native code နဲ့ assets တွေကို update မလုပ်နိုင်ပါဘူး။ Dart code အတွက်ပဲ အလုပ်လုပ်တယ်။
 
 ---
 
-### 7. Native Integration in Flutter (Android and iOS)
+## 7. Native Integration in Flutter (Android and iOS)
 
 - flutter version `3.24.1` ကို အခြေခံထားပါတယ် နောက်ပိုင်း vesion change ရင် native integration တွေလည်း ပြောင်းသွားနိုင်ပါတယ်။
 
@@ -136,3 +58,17 @@ Eg: `.github/workflows/release.yaml` [release.yaml](.github/workflows/release.ya
 18. [Speech Integration](./native_integrations/18_speech.md)
 19. [Vibration Integration](./native_integrations/19_vibration.md)
 20. [Other Integrations](./native_integrations/20_others.md)
+
+## 8. State Management and Local Storage Recommendations
+
+- **Recommended State Management**:
+
+  - Small app ဆိုရင် **Provider** ဒါမှမဟုတ် **GetX** က လုံလောက်ပါတယ်။ (MVC)
+  - Medium app ဆိုရင် **Riverpod** က type safety နဲ့ scalability ပေးပါတယ်။ (MVVM)
+  - Large app ဆိုရင် **Bloc** ဒါမှမဟုတ် **Redux** က complex logic ကို ကောင်းကောင်း handle လုပ်နိုင်ပါတယ်။ (Clean Architecture)
+  - Navigation ကို အဓိကထား စီမံချင်ရင် **Go Router** ကို သုံးပါ။
+
+- **Recommended Local Storage**:
+  - **GetStorage**: GetX နဲ့အတူ သုံးမယ်ဆိုရင် fast ဖြစ်ပြီး simple data အတွက် သင့်တော်ပါတယ်။
+  - **Shared Preferences**: General-purpose small data storage အတွက် အဆင်ပြေပါတယ်။
+  - **Flutter Secure Storage**: API keys လို sensitive data အတွက် မဖြစ်မနေ သုံးသင့်ပါတယ်။
