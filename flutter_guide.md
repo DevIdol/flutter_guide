@@ -135,4 +135,4 @@ Eg: `.github/workflows/release.yaml` [release.yaml](.github/workflows/release.ya
 17. [Wearables Integration](./native_integrations/17_wearables.md)
 18. [Speech Integration](./native_integrations/18_speech.md)
 19. [Vibration Integration](./native_integrations/19_vibration.md)
-20. [Other Integration](./native_integrations/20_others.md)
+20. [Other Integrations](./native_integrations/20_others.md)
