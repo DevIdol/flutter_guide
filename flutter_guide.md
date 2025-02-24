@@ -27,7 +27,7 @@
 
 ## 6. Shorebird
 
-- Shorebird က code push လုပ်ဖို့ အသုံးဝင်ပြီး Play Store/App Store update မလိုပဲ app ကို update လုပ်နိုင်ပါတယ်။(doc)[https://docs.shorebird.dev/]
+- Shorebird က code push လုပ်ဖို့ အသုံးဝင်ပြီး Play Store/App Store update မလိုပဲ app ကို update လုပ်နိုင်ပါတယ်။[official doc](https://docs.shorebird.dev/)
 - **Details**: [.github/workflows/release.yaml](.github/workflows/release.yaml)
 - **Limitations**:
   - Native code နဲ့ assets တွေကို update မလုပ်နိုင်ပါဘူး။ Dart code အတွက်ပဲ အလုပ်လုပ်တယ်။
