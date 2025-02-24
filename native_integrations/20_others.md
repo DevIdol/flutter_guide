@@ -12,7 +12,7 @@
 
 3. **Clipboard Access**:
 
-   - **Purpose**: Clipboard ထဲက data ကို ဖတ်/ရေးဖို့။
+   - **Purpose**: Clipboard ထဲက data ကို read/write ဖို့။
    - **Package**: [flutter_clipboard_manager](https://pub.dev/packages/flutter_clipboard_manager)
 
 4. **Battery Information**:
@@ -39,4 +39,4 @@
    - **Purpose**: Flutter packages တွေမှာ မရှိတဲ့ platform-specific features တွေကို ထည့်ဖို့။
    - **Approach**: Platform Channels နဲ့ Kotlin/Swift သုံးပြီး custom plugins ရေးပါ။
 
-- Project Requirements တွေ အပေါ် မူတည်ပြီး တစ်ခြား Native မှာ Integrate လုပ်ရမယ့် ဟာတွေလည်း ရှိအုန်းမှာပါ
+- Project Requirements တွေ အပေါ် မူတည်ပြီး တစ်ခြား Native မှာ Integrate လုပ်ရမယ့် ဟာတွေလည်း ရှိနိုင်ပါသေးတယ်
