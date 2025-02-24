@@ -114,6 +114,8 @@ Eg: `.github/workflows/release.yaml` [release.yaml](.github/workflows/release.ya
 
 ### 7. Native Integration in Flutter (Android and iOS)
 
+- flutter version `3.24.1` ကို အခြေခံထားပါတယ် နောက်ပိုင်း vesion ချိန်ရင် native integration တွေလည်း ပြောင်းသွားနိုင်ပါတယ်။
+
 1. [Dart Define Integration](01_dart_define.md)
 2. [Google API Key Integration with Dart Define](02_api_key.md)
 3. [Camera Integration](03_camera.md)
