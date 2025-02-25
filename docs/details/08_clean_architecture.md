@@ -1,4 +1,4 @@
-## Clean Architecture with Bloc + Cubit
+## Clean Architecture with Bloc + Cubit Folder Structure
 
 - requirements and features တွေ အပေါ် မူတည်ပြီး folder structure ကို ပြောင်းနိုင်ပါတယ်
 

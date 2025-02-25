@@ -1,4 +1,4 @@
-## MVVM with Riverpod (Flutter Hooks + Hooks Riverpod) + Repository
+## MVVM with Riverpod (Flutter Hooks + Hooks Riverpod) + Repository Folder Structure
 
 - requirements and features တွေ အပေါ် မူတည်ပြီး folder structure ကို ပြောင်းနိုင်ပါတယ်
 
