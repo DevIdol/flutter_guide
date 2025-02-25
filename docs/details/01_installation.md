@@ -47,7 +47,4 @@
   - **စစ်ဆေးနည်း**: `java -version` run ပါ။
 - **Visual Studio Code သို့မဟုတ် IntelliJ IDEA**: Development အတွက် IDE တစ်ခု လိုအပ်ပါတယ်။ VS Code ကို [official site](https://code.visualstudio.com/) ကနေ ရယူနိုင်ပြီး Flutter extension ထည့်ပါ။
 
-- **Notes**:
-  - အကယ်၍ web development လုပ်မယ်ဆိုရင် Chrome browser သို့မဟုတ် Edge ကို install လုပ်ထားဖို့ `flutter doctor` က အကြံပြုပါလိမ့်မယ်။
-
 ---
