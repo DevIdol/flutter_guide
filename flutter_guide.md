@@ -63,12 +63,14 @@
 
 - **Recommended State Management**:
 
-  - Small app ဆိုရင် **Provider** ဒါမှမဟုတ် **GetX** က လုံလောက်ပါတယ်။ (MVC)
-  - Medium app ဆိုရင် **Riverpod** က type safety နဲ့ scalability ပေးပါတယ်။ (MVVM)
-  - Large app ဆိုရင် **Bloc** ဒါမှမဟုတ် **Redux** က complex logic ကို ကောင်းကောင်း handle လုပ်နိုင်ပါတယ်။ (Clean Architecture)
-  - Navigation ကို အဓိကထား စီမံချင်ရင် **Go Router** ကို သုံးပါ။
+  - Small app ဆိုရင် **[Provider](https://pub.dev/packages/provider)** ဒါမှမဟုတ် **[GetX](https://pub.dev/packages/get)** က လုံလောက်ပါတယ်။ [MVC](docs/details/08_mvc.md)
+  - Medium app ဆိုရင် **[Riverpod](https://pub.dev/packages/flutter_riverpod)** က type safety နဲ့ scalability ပေးပါတယ်။ [MVVM + Repository](docs/details/08_mvvm.md)
+  - Large app ဆိုရင် **[Bloc](https://pub.dev/packages/flutter_bloc)** and **[Bloc Official Doc](https://bloclibrary.dev/getting-started/)** က complex logic ကို ကောင်းကောင်း handle လုပ်နိုင်ပါတယ်။ [Clean Architecture](docs/details/08_clean_architecture.md)
+  - Navigation ကို အဓိကထား စီမံချင်ရင် **[Go Router](https://pub.dev/packages/go_router)** ကို သုံးပါ။
 
 - **Recommended Local Storage**:
-  - **GetStorage**: GetX နဲ့အတူ သုံးမယ်ဆိုရင် fast ဖြစ်ပြီး simple data အတွက် သင့်တော်ပါတယ်။
-  - **Shared Preferences**: General-purpose small data storage အတွက် အဆင်ပြေပါတယ်။
-  - **Flutter Secure Storage**: API keys လို sensitive data အတွက် မဖြစ်မနေ သုံးသင့်ပါတယ်။
+  - **[GetStorage](https://pub.dev/packages/get_storage)**: GetX နဲ့အတူ သုံးမယ်ဆိုရင် fast ဖြစ်ပြီး simple data အတွက် သင့်တော်ပါတယ်။
+  - **[Shared Preferences](https://pub.dev/packages/shared_preferences)**: General-purpose small data storage အတွက် အဆင်ပြေပါတယ်။
+  - **[Flutter Secure Storage](https://pub.dev/packages/flutter_secure_storage)**: API keys လို sensitive data အတွက် မဖြစ်မနေ သုံးသင့်ပါတယ်။
+
+---
