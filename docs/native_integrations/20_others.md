@@ -35,7 +35,12 @@
    - **Purpose**: Device ရဲ့ screen brightness ကို control လုပ်ဖို့။
    - **Package**: [screen_brightness](https://pub.dev/packages/screen_brightness)
 
-8. **Custom Native Code**:
+8. **Device Local Notification**:
+
+   - **Purpose**: Device Notifications တွေအတွက် သုံးဖို့။
+   - **Package**: [flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications)
+
+9. **Custom Native Code**:
    - **Purpose**: Flutter packages တွေမှာ မရှိတဲ့ platform-specific features တွေကို ထည့်ဖို့။
    - **Approach**: Platform Channels နဲ့ Kotlin/Swift သုံးပြီး custom plugins ရေးပါ။
 
